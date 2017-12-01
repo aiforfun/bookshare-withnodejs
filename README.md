@@ -1,10 +1,22 @@
-# bookshare-withnodejs
+# Loc8r project is using for studying MEAN
+- Install NodeJS + Npm
+- Install express: $npm install -g express-generator
+# AUTOMATICALLY RESTARTING THE APPLICATION WITH NODEMON
+- npm install -g nodemon
 
-I create this repository while studying NodeJS (Getting MEAN with Mongo, Express, Angular, and Node). And also try to create a booksharing flatform.
+# Render project structure
+$express
 
-# Rapid prototype development stages
-- STAGE 1: BUILD A STATIC SITE
-- STAGE 2: DESIGN THE DATA MODEL AND CREATE THE DATABASE
-- STAGE 3: BUILD OUR DATA API
-- STAGE 4: HOOK THE DATABASE INTO THE APPLICATION
-- STAGE 5: AUGMENT THE APPLICATION (EMBELLISH THE APPLICATION)
+# Install and Run
+$npm install
+$npm start
+
+# Auto restarting
+$nodemon
+
+Access: http://localhost:3000
+
+# Test Pre-deploy to Heroku
+$nf start
+
+Access: http://localhost:5000
