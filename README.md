@@ -20,3 +20,8 @@ Access: http://localhost:3000
 $nf start
 
 Access: http://localhost:5000
+
+# Deploy to Heroku
+- Heroku will detect new changes from https://github.com/aiforfun/bookshare-withnodejs, master branch and do deploy automatically.
+Public URL:
+https://bookshare-loc8r.herokuapp.com/
