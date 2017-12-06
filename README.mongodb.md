@@ -30,3 +30,9 @@
 - $ mongorestore -h ds129776.mlab.com:29776 -d loc8r -u <dbuser> -p <dbpassword> ~/tmp/mongodump/Loc8r
 
 # TESTING THE LIVE DATABASE
+
+find General search based on a supplied query object
+■ findById Look for a specific ID
+■ findOne Get the first document to match the supplied query
+■ geoNear Find places geographically close to the provided latitude and longitude
+■ geoSearch Add query functionality to a geoNear operation

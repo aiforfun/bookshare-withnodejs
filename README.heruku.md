@@ -1,4 +1,8 @@
+# Set Heroku Environment
 $heroku config:set MONGOLAB_URI=your_db_uri --app bookshare-loc8r
+
+# View log
+$heroku logs --app bookshare-loc8r
 
 # ADDING MONGOLAB TO THE HEROKU APPLICATION
 $ heroku addons:add mongolab --app bookshare-loc8r
