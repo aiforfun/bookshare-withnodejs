@@ -46,9 +46,12 @@ module.exports.locationsListByDistance = function (req, res) {
   };
   var geoOptions = {
     spherical: true,
-    maxDistance: meterConversion.kmToM(20), //distance to 20 km
+    maxDistance: meterConversion.kmToM(20), //Default distance to 20 km
     num: 10
   };
+  if (req.query.maxDistance){
+    geoOptions.maxDistance = meterConversion.kmToM(parseFloat(req.query.maxDistance));
+  }
 
   if (!lng || !lat) {
     sendJsonResponse(res, 404, {
