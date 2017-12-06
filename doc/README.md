@@ -9,3 +9,7 @@ Table 6.5 Most popular HTTP status codes and how they might be used when sending
 405 Request method not allowed for the given URL
 409 Unsuccessful POST request when another object already exists with the same data
 500 Problem with your server or the database server
+
+Radians = distance/radius
+Distance = radians ⋅ radius
+The radius of Earth is 6,371 kilometers, or 3,959 miles.

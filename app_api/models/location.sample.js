@@ -1,7 +1,7 @@
 db.locations.save({
 name: 'Starcups',
 address: '125 High Street, Reading, RG6 1PS', rating: 3,
-facilities: ['Hot drinks', 'Food', 'Premium wifi'], coords: [103.83796619999998, 1.2997376999999999 ],
+facilities: ['Hot drinks', 'Food', 'Premium wifi'], coords: [103.83796619999998, 1.2997376999999999 ], // [lgn,lat] 
 openingTimes: [{
     days: 'Monday - Friday',
     opening: '7:00am',
