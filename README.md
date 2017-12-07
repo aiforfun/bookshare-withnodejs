@@ -30,3 +30,6 @@ https://bookshare-loc8r.herokuapp.com/
 
 # To get your current the coordinates
 - https://whatsmylatlng.com/
+
+# Google API (Need Key API for the embedded Map)
+- https://console.developers.google.com
