@@ -14,7 +14,7 @@ $npm start
 # Auto restarting
 - $nodemon
 - Run on productin mode: $NODE_ENV=production nodemon
-- NODE_ENV=production MONGOLAB_URI=mongodb://<username>:<password>@<hostname>:<port>/<database> nodemon start
+- NODE_ENV=production MONGOLAB_URI=mongodb://<username>:<password>@ds129776.mlab.com:29776/loc8r nodemon start
 
 Access: http://localhost:3000
 

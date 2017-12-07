@@ -4,7 +4,7 @@ var apiOptions = {
   server : "http://localhost:3000"
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = "https://bookshare-loc8r.herokuapp.com/";
+  apiOptions.server = "https://bookshare-loc8r.herokuapp.com";
 }
 
 var _formatDistance = function (distance) {
@@ -84,6 +84,7 @@ module.exports.homelist = function(req, res){
     }
   };
 
+  console.log('HomeList Request:' + JSON.stringify(requestOptions));
   request(
     requestOptions,
     function(err, response, body) {
@@ -110,6 +111,8 @@ module.exports.locationInfo = function(req, res){
     method : "GET",
     json : {}
   };
+
+  console.log('locationInfo Request:' + JSON.stringify(requestOptions));
   request(
     requestOptions,
     function(err, response, body) {
