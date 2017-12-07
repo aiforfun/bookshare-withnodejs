@@ -33,3 +33,7 @@ https://bookshare-loc8r.herokuapp.com/
 
 # Google API (Need Key API for the embedded Map)
 - https://console.developers.google.com
+
+# Adding reCAPTCHA to your site
+- Site key: 6Ld3FjwUAAAAAPXtR4sFFrYUU65MtlOTbICiRrKy
+- Secret key: 6Ld3FjwUAAAAAKnMY0pUcbTlmIgE2oDfDmvDsaVG

@@ -82,6 +82,7 @@ var updateAverageRating = function(locationid) {
 }); };
 
 var doAddReview = function(req, res, location) {
+  console.log('doAddReview: location=' + location + ';author='+ req.body.author + ';rating=' + req.body.rating + ';reviewText=' + req.body.reviewText)
   if (!location) {
     sendJsonResponse(res, 404, {
       "message": "locationid not found"
