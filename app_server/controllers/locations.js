@@ -1,5 +1,6 @@
-/* GET 'home' page */
 var request = require('request');
+var Recaptcha = require('express-recaptcha');
+var recaptcha = new Recaptcha('6Ld3FjwUAAAAAPXtR4sFFrYUU65MtlOTbICiRrKy', '6Ld3FjwUAAAAAKnMY0pUcbTlmIgE2oDfDmvDsaVG');
 
 var apiOptions = {
   server : "http://localhost:3000"
@@ -167,35 +168,44 @@ module.exports.doAddReview = function(req, res){
   var requestOptions, path, locationid, postdata;
   locationid = req.params.locationid;
   path = "/api/locations/" + locationid + '/reviews';
-  if (verifyRecaptcha(req, res)){
-    postdata = {
-      author: req.body.name,
-      rating: parseInt(req.body.rating, 10),
-      reviewText: req.body.review
-    };
-    requestOptions = {
-      url : apiOptions.server + path,
-      method : "POST",
-      json : postdata
-    };
 
-    if (!postdata.author || !postdata.rating || !postdata.reviewText) {
-      res.redirect('/location/' + locationid + '/reviews/new?err=val');
-    } else {
-      request(
-        requestOptions,
-        function(err, response, body) {
-          if (response.statusCode === 201) {
-            res.redirect('/location/' + locationid);
-          } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
-            res.redirect('/location/' + locationid + '/reviews/new?err=val');
-          } else {
-            _showError(req, res, response.statusCode);
+  recaptcha.verify(req, function(error, data){
+    if(!error) {
+      postdata = {
+        author: req.body.name,
+        rating: parseInt(req.body.rating, 10),
+        reviewText: req.body.review
+      };
+      requestOptions = {
+        url : apiOptions.server + path,
+        method : "POST",
+        json : postdata
+      };
+
+      if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+        res.redirect('/location/' + locationid + '/reviews/new?err=val');
+      } else {
+        request(
+          requestOptions,
+          function(err, response, body) {
+            if (response.statusCode === 201) {
+              res.redirect('/location/' + locationid);
+            } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
+              res.redirect('/location/' + locationid + '/reviews/new?err=val');
+            } else {
+              _showError(req, res, response.statusCode);
+            }
           }
-        }
-      );
+        );
+      }
+    } else {
+      res.redirect('/location/' + locationid + '/reviews/new?err=val&captcha=required');
     }
-  } else {
-    res.redirect('/location/' + locationid + '/reviews/new?err=val');
-  }
+  });
+
+  //if (verifyRecaptcha(req, res)){
+
+  //} else {
+    //res.redirect('/location/' + locationid + '/reviews/new?err=val');
+  //}
 };
