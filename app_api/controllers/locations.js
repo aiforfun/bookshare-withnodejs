@@ -38,6 +38,7 @@ var meterConversion = (function() {
 })();
 
 module.exports.locationsListByDistance = function (req, res) {
+  console.log("Calling locationsListByDistance");
   var lng = parseFloat(req.query.lng);
   var lat = parseFloat(req.query.lat);
   var point = {
@@ -81,6 +82,7 @@ module.exports.locationsListByDistance = function (req, res) {
   });
 };
 module.exports.locationsCreate = function (req, res) {
+  console.log("Calling locationsCreate");
   Loc.create({
     name: req.body.name,
     address: req.body.address,
@@ -99,6 +101,7 @@ module.exports.locationsCreate = function (req, res) {
     }]
   }, function(err, location) {
     if (err) {
+      console.log(err);
       sendJsonResponse(res, 400, err);
     } else {
       sendJsonResponse(res, 201, location);
@@ -106,6 +109,7 @@ module.exports.locationsCreate = function (req, res) {
   });
 };
 module.exports.locationsReadOne = function (req, res) {
+  console.log("Calling locationsReadOne");
   if (req.params && req.params.locationid) {
     Loc
       .findById(req.params.locationid)
@@ -116,6 +120,7 @@ module.exports.locationsReadOne = function (req, res) {
           });
           return;
         } else if (err) {
+          console.log(err);
           sendJsonResponse(res, 404, err);
           return;
         }
@@ -129,6 +134,7 @@ module.exports.locationsReadOne = function (req, res) {
   }
 };
 module.exports.locationsUpdateOne = function (req, res) {
+  console.log("Calling locationsUpdateOne");
   if (!req.params.locationid) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid is required"
@@ -146,6 +152,7 @@ module.exports.locationsUpdateOne = function (req, res) {
           });
           return;
         } else if (err) {
+          console.log(err);
           sendJsonResponse(res, 400, err);
           return;
         }
@@ -168,6 +175,7 @@ module.exports.locationsUpdateOne = function (req, res) {
 
         location.save(function(err, location) {
           if (err) {
+            console.log(err);
             sendJsonResponse(res, 404, err);
           } else {
             sendJsonResponse(res, 200, location);
@@ -180,6 +188,7 @@ module.exports.locationsUpdateOne = function (req, res) {
 };
 
 module.exports.locationsDeleteOne = function (req, res) {
+  console.log("Calling locationsDeleteOne");
   var locationid = req.params.locationid;
   if (locationid) {
     Loc
@@ -187,6 +196,7 @@ module.exports.locationsDeleteOne = function (req, res) {
       .exec(
         function(err, location) {
           if (err) {
+            console.log(err);
             sendJsonResponse(res, 404, err);
             return;
           }

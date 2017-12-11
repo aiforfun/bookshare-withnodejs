@@ -7,6 +7,7 @@ var sendJsonResponse = function(res, status, content) {
 };
 
 module.exports.reviewsReadOne = function(req, res) {
+  console.log("Calling reviewsReadOne");
   if (req.params && req.params.locationid && req.params.reviewid) {
     Loc
       .findById(req.params.locationid)
@@ -19,6 +20,7 @@ module.exports.reviewsReadOne = function(req, res) {
           });
           return;
         } else if (err) {
+          console.log(err);
           sendJsonResponse(res, 404, err);
           return;
         }
@@ -62,7 +64,7 @@ var doSetAverageRating = function(location) {
     location.rating = ratingAverage;
     location.save(function(err) {
       if (err) {
-      console.log(err);
+        console.log(err);
       } else {
         console.log("Average rating updated to", ratingAverage);
       }
@@ -78,8 +80,11 @@ var updateAverageRating = function(locationid) {
       function(err, location) {
         if (!err) {
           doSetAverageRating(location);
+        } else {
+          console.log(err);
         }
-}); };
+      });
+};
 
 var doAddReview = function(req, res, location) {
   console.log('doAddReview: location=' + location + ';author='+ req.body.author + ';rating=' + req.body.rating + ';reviewText=' + req.body.reviewText)
@@ -96,6 +101,7 @@ var doAddReview = function(req, res, location) {
     location.save(function(err, location) {
       var thisReview;
       if (err) {
+        console.log(err);
         sendJsonResponse(res, 400, err);
       } else {
         updateAverageRating(location._id);
@@ -107,6 +113,7 @@ var doAddReview = function(req, res, location) {
 }
 
 module.exports.reviewsCreate = function(req, res) {
+  console.log("Calling reviewsCreate");
   var locationid = req.params.locationid;
   if (locationid) {
     Loc
@@ -115,6 +122,7 @@ module.exports.reviewsCreate = function(req, res) {
       .exec(
         function(err, location) {
           if (err) {
+            console.log(err);
             sendJsonResponse(res, 400, err);
           } else {
             doAddReview(req, res, location);
@@ -129,6 +137,7 @@ module.exports.reviewsCreate = function(req, res) {
 }
 
 module.exports.reviewsUpdateOne = function(req, res) {
+  console.log("Calling reviewsUpdateOne");
   if (!req.params.locationid || !req.params.reviewid) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid and reviewid are both required"
@@ -147,6 +156,7 @@ module.exports.reviewsUpdateOne = function(req, res) {
           });
           return;
         } else if (err) {
+          console.log(err);
           sendJsonResponse(res, 400, err);
           return;
         }
@@ -162,6 +172,7 @@ module.exports.reviewsUpdateOne = function(req, res) {
             thisReview.reviewText = req.body.reviewText;
             location.save(function(err, location) {
               if (err) {
+                console.log(err);
                 sendJsonResponse(res, 404, err);
               } else {
                 updateAverageRating(location._id);
@@ -179,6 +190,7 @@ module.exports.reviewsUpdateOne = function(req, res) {
 }
 
 module.exports.reviewsDeleteOne = function(req, res) {
+  console.log("Calling reviewsDeleteOne");
   if (!req.params.locationid || !req.params.reviewid) {
     sendJsonResponse(res, 404, {
       "message": "Not found, locationid and reviewid are both required"
@@ -197,6 +209,7 @@ module.exports.reviewsDeleteOne = function(req, res) {
           });
           return;
         } else if (err) {
+          console.log(err);
           sendJsonResponse(res, 400, err);
           return;
         }
@@ -209,6 +222,7 @@ module.exports.reviewsDeleteOne = function(req, res) {
             location.reviews.id(req.params.reviewid).remove();
             location.save(function(err) {
               if (err) {
+                console.log(err);
                 sendJsonResponse(res, 404, err);
               } else {
                 updateAverageRating(location._id);
