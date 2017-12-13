@@ -45,6 +45,7 @@ module.exports.locationsListByDistance = function (req, res) {
     type: "Point",
     coordinates: [lng, lat]
   };
+  console.log("Searching for location: " + JSON.stringify(point))
   var geoOptions = {
     spherical: true,
     maxDistance: meterConversion.kmToM(20), //Default distance to 20 km
