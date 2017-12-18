@@ -1,4 +1,5 @@
 require('strict-mode')(function () {
+  require('dotenv').load();
   var express = require('express');
   var path = require('path');
   var favicon = require('serve-favicon');
@@ -8,6 +9,7 @@ require('strict-mode')(function () {
   require('./app_api/models/db');
   var uglifyJs = require("uglify-js");
   var fs = require('fs'); // Buildin of Nodejs
+
 
   //var users = require('./app_server/routes/users');
   var routes = require('./app_server/routes/index');

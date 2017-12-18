@@ -2,3 +2,4 @@ loc8r/node_modules
 node_modules
 loc8r.min.js
 loc8r.min.js.map
+.env
