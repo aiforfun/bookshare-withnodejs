@@ -14,3 +14,6 @@ $ heroku config:get MONGOLAB_URI --app bookshare-loc8r
 
 # Ensuring Heroku is using production mode
 $ heroku config:set NODE_ENV=production --app bookshare-loc8r
+
+# Set environment variables
+$ heroku config:set JWT_SECRET=thisIsSecret --app bookshare-loc8r

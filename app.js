@@ -6,10 +6,12 @@ require('strict-mode')(function () {
   var logger = require('morgan');
   var cookieParser = require('cookie-parser');
   var bodyParser = require('body-parser');
-  require('./app_api/models/db');
   var uglifyJs = require("uglify-js");
   var fs = require('fs'); // Buildin of Nodejs
+  var passport = require('passport');
 
+  require('./app_api/models/db');
+  require('./app_api/config/passport');
 
   //var users = require('./app_server/routes/users');
   var routes = require('./app_server/routes/index');
@@ -25,10 +27,12 @@ require('strict-mode')(function () {
     'app_client/app.js',
     'app_client/home/home.controller.js',
     'app_client/about/about.controller.js',
+    'app_client/auth/register/register.controller.js',
     'app_client/locationDetail/locationDetail.controller.js',
     'app_client/reviewModal/reviewModal.controller.js',
     'app_client/common/services/geolocation.service.js',
     'app_client/common/services/loc8rData.service.js',
+    'app_client/common/services/authentication.service.js',
     'app_client/common/filters/formatDistance.filter.js',
     'app_client/common/filters/addHtmlLineBreaks.filter.js',
     'app_client/common/directives/ratingStars/ratingStars.directive.js',
@@ -36,7 +40,7 @@ require('strict-mode')(function () {
     'app_client/common/directives/navigation/navigation.directive.js',
     'app_client/common/directives/pageHeader/pageHeader.directive.js'
   ];
-  var uglified = uglifyJs.minify(appClientFiles, { compress : false, outSourceMap: "out.js.map" });
+  var uglified = uglifyJs.minify(appClientFiles, { mangle: false, beautify: true, compress : false, outSourceMap: "out.js.map" });
   fs.writeFile('public/angular/loc8r.min.js', uglified.code, function (err){
     if(err) {
       console.log(err);
@@ -61,12 +65,23 @@ require('strict-mode')(function () {
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.static(path.join(__dirname, 'app_client')));
 
+  app.use(passport.initialize());
+
   //app.use('/', routes);
   //app.use('/users', users);
   app.use('/api', routesApi);
 
   app.use(function(req, res) {
     res.sendfile(path.join(__dirname, 'app_client', 'index.html'));
+  });
+
+  // error handlers
+  // Catch unauthorised errors
+  app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401);
+      res.json({"message" : err.name + ": " + err.message});
+    }
   });
 
   // catch 404 and forward to error handler
