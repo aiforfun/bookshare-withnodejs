@@ -19,7 +19,7 @@
     vm.onSubmit = function () {
       vm.formError = "";
       if (!vm.credentials.name || !vm.credentials.email ||
-        !vm.credentials.password) {
+        !vm.credentials.password || !vm.grecaptcharesponse) {
         vm.formError = "All fields required, please try again";
         return false;
       } else {
@@ -28,6 +28,7 @@
     };
     vm.doRegister = function() {
       vm.formError = "";
+      vm.credentials["g-recaptcha-response"] = vm.grecaptcharesponse;
       authentication
         .register(vm.credentials)
         .then(

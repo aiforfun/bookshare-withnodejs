@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+  angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'vcRecaptcha']);
 
   function config ($routeProvider, $locationProvider) {
     $routeProvider

@@ -24,21 +24,20 @@
     };
     vm.onSubmit = function () {
       vm.formError = "";
-      if(!vm.formData.rating || !vm.formData.reviewText) {
+      if(!vm.formData.grecaptcharesponse || !vm.formData.rating || !vm.formData.reviewText) {
         vm.formError = "All fields required, please try again";
         return false;
       } else {
         vm.doAddReview(vm.locationData.locationid, vm.formData);
-        console.log(vm.formData);
         return false;
       }
     };
     vm.doAddReview = function (locationid, formData) {
       loc8rData.addReviewById(locationid, {
         rating : formData.rating,
-        reviewText : formData.reviewText
+        reviewText : formData.reviewText,
+        "g-recaptcha-response" : formData.grecaptcharesponse
       }).then(function (data){
-        console.log("Success!");
         vm.modal.close(data);
       }, function (error) {
         console.log(error);

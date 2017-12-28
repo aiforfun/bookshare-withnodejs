@@ -35,7 +35,6 @@
         }
       });
       modalInstance.result.then(function (result) {
-        console.log(result.data);
         vm.data.location.reviews.push(result.data);
       });
     };
