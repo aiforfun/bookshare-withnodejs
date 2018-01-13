@@ -36,14 +36,14 @@
     vm.showError = function (error) {
       vm.defaultLocation();
       $scope.$apply(function() {
-        vm.message = error.message;
+        vm.warningMessage = error.message;
       });
     };
 
     vm.noGeo = function () {
       vm.defaultLocation();
       $scope.$apply(function() {
-        vm.message = "Geolocation not supported by this browser.";
+        vm.warningMessage = "Geolocation not supported by this browser.";
       });
     };
 

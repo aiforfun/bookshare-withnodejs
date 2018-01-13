@@ -29,6 +29,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h2 class="panel-title">Your current location</h2>
+          <i>{{ vm.warningMessage }} {{ vm.warningMessage ? ': Use default location' : ''}}</i>
         </div>
         <div class="panel-body">
           <img class="img-responsive img-rounded" src="https://maps.googleapis.com/maps/api/staticmap?center={{vm.currentPosition.coords.latitude }},{{ vm.currentPosition.coords.longitude}}&zoom=17&size=400x350&sensor=false&markers={{vm.currentPosition.coords.latitude }},{{ vm.currentPosition.coords.longitude}}&scale=2&key=AIzaSyDFb3hSieOudMsN71ODUpr2Aq5Z-uddGyE">
