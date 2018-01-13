@@ -18,6 +18,7 @@
     vm.getData = function (position) {
       console.log("Your location: ");
       console.log(position);
+      vm.currentPosition = position;
 
       vm.message = "Searching for nearby places";
 
@@ -34,16 +35,16 @@
 
     vm.showError = function (error) {
       vm.defaultLocation();
-      // $scope.$apply(function() {
-      //   vm.message = error.message;
-      // });
+      $scope.$apply(function() {
+        vm.message = error.message;
+      });
     };
 
     vm.noGeo = function () {
       vm.defaultLocation();
-      // $scope.$apply(function() {
-      //   vm.message = "Geolocation not supported by this browser.";
-      // });
+      $scope.$apply(function() {
+        vm.message = "Geolocation not supported by this browser.";
+      });
     };
 
     vm.defaultLocation = function(){

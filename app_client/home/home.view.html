@@ -26,6 +26,14 @@
     </div>
     <div class="col-xs-12 col-sm-4">
       <p class="lead">{{ vm.sidebar.content }}</p>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">Your current location</h2>
+        </div>
+        <div class="panel-body">
+          <img class="img-responsive img-rounded" src="https://maps.googleapis.com/maps/api/staticmap?center={{vm.currentPosition.coords.latitude }},{{ vm.currentPosition.coords.longitude}}&zoom=17&size=400x350&sensor=false&markers={{vm.currentPosition.coords.latitude }},{{ vm.currentPosition.coords.longitude}}&scale=2&key=AIzaSyDFb3hSieOudMsN71ODUpr2Aq5Z-uddGyE">
+        </div>
+      </div>
     </div>
   </div>
 
