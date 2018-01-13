@@ -33,17 +33,22 @@
     };
 
     vm.showError = function (error) {
-      $scope.$apply(function() {
-        vm.message = error.message;
-      });
+      vm.defaultLocation();
+      // $scope.$apply(function() {
+      //   vm.message = error.message;
+      // });
     };
 
     vm.noGeo = function () {
-      var defaulPosition = {"coords": {"latitude": 1.350351, "longitude": 103.873564}};
-      vm.getData(defaulPosition);
+      vm.defaultLocation();
       // $scope.$apply(function() {
       //   vm.message = "Geolocation not supported by this browser.";
       // });
+    };
+
+    vm.defaultLocation = function(){
+      var defaulPosition = {"coords": {"latitude": 1.350351, "longitude": 103.873564}};
+      vm.getData(defaulPosition);
     };
 
     geolocation.getPosition(vm.getData, vm.showError, vm.noGeo);
