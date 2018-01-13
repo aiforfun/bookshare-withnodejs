@@ -39,9 +39,11 @@
     };
 
     vm.noGeo = function () {
-      $scope.$apply(function() {
-        vm.message = "Geolocation not supported by this browser.";
-      });
+      var defaulPosition = {"coords": {"latitude": 1.350351, "longitude": 103.873564}};
+      vm.getData(defaulPosition);
+      // $scope.$apply(function() {
+      //   vm.message = "Geolocation not supported by this browser.";
+      // });
     };
 
     geolocation.getPosition(vm.getData, vm.showError, vm.noGeo);
